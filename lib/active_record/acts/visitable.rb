@@ -6,9 +6,16 @@ module ActiveRecord
       end
 
       module ClassMethods
-        def acts_as_visitable
+        def acts_as_visitable(options = {})
+          configuration = { :full_log => false }
+          configuration.update(options) if options.is_a?(Hash)
+
           has_one :visits_counter, :as => :visitable, :dependent => :destroy
           after_create :new_visits_counter
+
+          if configuration[:full_log]
+            has_many :visits_logs, :as => :loggable, :dependent => :destroy
+          end
 
           class_eval do
             def visits
@@ -20,6 +27,13 @@ module ActiveRecord
               counter = visits_counter || new_visits_counter
               counter.increment(:count).save
               counter.count
+            end
+
+            if configuration[:full_log]
+              def add_log(user)
+                increment_visits
+                VisitsLog.create(:loggable => self, :user => user)
+              end
             end
 
             private
