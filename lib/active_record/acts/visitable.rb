@@ -10,7 +10,7 @@ module ActiveRecord
           has_one :visits_counter, :as => :visitable, :dependent => :destroy
           after_create :new_visits_counter
 
-          class_eval <<-EOV
+          class_eval do
             def visits
               counter = new_visits_counter || visits_counter
               counter.count
@@ -26,7 +26,7 @@ module ActiveRecord
             def new_visits_counter
               VisitsCounter.create(:visitable => self) if visits_counter.nil?
             end
-          EOV
+          end
         end
       end
     end
