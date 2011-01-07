@@ -1,8 +1,8 @@
-= ActsAsVisitable
+# ActsAsVisitable
 
 With this plugin you can simply implement counter of page views.
 
-== Setup
+## Setup
 
 Install plugin:
 
@@ -37,7 +37,7 @@ Run migration and after that insert belongs_to to new model VisitsCounter in you
       belongs_to :visitable, :polymorphic => true
     end
 
-== Usage
+## Usage
 
 Once you have installed the plugin you can start using it in your ActiveRecord models simply by calling the acts_as_visitable method.
 
@@ -68,7 +68,7 @@ Or you can use increment exactly in view:
 
 I use here _increment_visits_ instead of _visits_ because increment_visits firstly incryment visits count and return new value for you.
 
-== How it works
+## How it works
 
 When you call Post.first.visits it's try to find visits_counter for this model and if it's not found, than create it and return 0 as visits count.
 And if visits_counter already exists than method visits will simply return count of visits from there.
