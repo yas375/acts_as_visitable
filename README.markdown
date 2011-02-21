@@ -92,7 +92,7 @@ for example you can insert it to _show_ method in your controller:
 
 Or you can use increment exactly in view:
 
-    = "Pageviews: #{@post.incremen_visits}"
+    = "Pageviews: #{@post.increment_visits}"
 
 I use here _increment\_visits_ instead of _visits_ because increment_visits firstly increment visits count and return new value for you.
 
