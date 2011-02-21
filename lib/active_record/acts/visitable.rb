@@ -30,9 +30,9 @@ module ActiveRecord
             end
 
             if configuration[:full_log]
-              def add_log(user)
+              def add_log(user, ip)
                 increment_visits
-                VisitsLog.create(:loggable => self, :user => user)
+                VisitsLog.create(:loggable => self, :user => user, :ip => ip)
               end
             end
 

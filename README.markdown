@@ -46,6 +46,7 @@ If you want also save logs about every visits than you will need also create mig
         create_table :visits_logs do |t|
           t.integer :loggable_id
           t.string :loggable_type
+          t.string :ip
           t.references :user
 
           t.timestamps
@@ -106,7 +107,7 @@ If you need to save log about visits (not only counter) than pass option :full_l
 
 And in controller where you want to add record to log call:
 
-    @attach.add_log(current_user)
+    @attach.add_log(current_user, request.remote_addr)
 
 To get all logs for some object (i.e. my @attach) use:
 
